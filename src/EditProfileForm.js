@@ -137,9 +137,7 @@ const EditProfileForm = ({ profile, onSubmit }) => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit" className="btn save">
-        Save
-      </button>
+      <button type="submit" className="btn save">Save</button>
     </form>
   );
 };

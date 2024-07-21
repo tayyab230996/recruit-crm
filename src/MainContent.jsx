@@ -1,38 +1,51 @@
 import React, { useState } from 'react';
 import './MainContent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faFolder,
-  faStar,
-  faEnvelope,
-} from '@fortawesome/free-solid-svg-icons';
+import { faFolder, faStar, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import EditProfileForm from './EditProfileForm';
 
 const MainContent = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
-    currentOrganization: 'World Bank Group',
-    skills: 'HTML, CSS, Javascript',
-    availableFrom: 'Jul, 14, 2023',
-    currentSalary: '$6000',
-    noticePeriod: '90 Days',
-    fullAddress: '9400 Ashton Rd, Philadelphia...',
-    summary: 'Current Organization',
-    currentEmploymentStatus: 'Employed',
-    dateOfBirth: '15 June 1993',
-    relevantExperience: '7 Years',
-    salaryExpectation: '$9000',
-    status: 'Submitted to Client',
-    languageSkills: 'English (Elementary proficiency)',
+    currentOrganization: "World Bank Group",
+    skills: "HTML, CSS, Javascript",
+    availableFrom: "Jul, 14, 2023",
+    currentSalary: "$6000",
+    noticePeriod: "90 Days",
+    fullAddress: "9400 Ashton Rd, Philadelphia...",
+    summary: "Current Organization",
+    currentEmploymentStatus: "Employed",
+    dateOfBirth: "15 June 1993",
+    relevantExperience: "7 Years",
+    salaryExpectation: "$9000",
+    status: "Submitted to Client",
+    languageSkills: "English (Elementary proficiency)"
   });
 
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  const handleFormSubmit = (updatedProfile) => {
-    setProfile(updatedProfile);
-    setIsEditing(false);
+  const handleFormSubmit = async (updatedProfile) => {
+    try {
+      const response = await fetch('https://api.example.com/profile', {
+        method: 'PUT', // or 'POST' depending on your API
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedProfile),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      setProfile(data);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
 
   return (
@@ -48,9 +61,7 @@ const MainContent = () => {
           </div>
           <div className="header-actions">
             <button className="btn contact-linked">Contact Linked</button>
-            <button className="btn" onClick={handleEditClick}>
-              Edit
-            </button>
+            <button className="btn" onClick={handleEditClick}>Edit</button>
             <button className="btn">✭</button>
             <button className="btn">⋮</button>
           </div>
