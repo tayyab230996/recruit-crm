@@ -1,0 +1,47 @@
+.left-sidebar {
+    width: 60px;
+    background-color: #183866;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .menu-item {
+    padding: 15px 0;
+    text-align: center;
+  }
+  
+  .menu-item.active {
+    background-color: #1b4f91;
+  }
+  
+  .icon {
+    font-size: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .left-sidebar {
+      width: 100%;
+      height: auto;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  
+    .menu-item {
+      padding: 10px;
+    }
+  
+    .icon {
+      font-size: 16px;
+    }
+  }
+  
